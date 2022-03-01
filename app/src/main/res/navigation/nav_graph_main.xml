@@ -9,10 +9,21 @@
         android:id="@+id/weatherFragment"
         android:name="com.senex.weather.ui.weather.WeatherFragment"
         android:label="WeatherFragment"
-        tools:layout="@layout/fragment_weather" />
+        tools:layout="@layout/fragment_weather" >
+        <action
+            android:id="@+id/action_weatherFragment_to_cityListFragment"
+            app:destination="@id/cityListFragment" />
+        <argument
+            android:name="city_id"
+            app:argType="long" />
+    </fragment>
     <fragment
         android:id="@+id/cityListFragment"
         android:name="com.senex.weather.ui.cities.CityListFragment"
         android:label="CityListFragment"
-        tools:layout="@layout/fragment_city_list" />
+        tools:layout="@layout/fragment_city_list" >
+        <action
+            android:id="@+id/action_cityListFragment_to_weatherFragment"
+            app:destination="@id/weatherFragment" />
+    </fragment>
 </navigation>

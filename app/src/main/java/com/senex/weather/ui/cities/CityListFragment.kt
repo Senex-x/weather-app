@@ -26,8 +26,13 @@ class CityListFragment: Fragment() {
     override fun onViewCreated(
         view: View,
         savedInstanceState: Bundle?,
-    ) = with(binding) {
+    ): Unit = with(binding) {
         cityRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         cityRecyclerView.adapter = CityRecyclerAdapter(listOf(CityInfo("asf", 123),CityInfo("asf", 123),CityInfo("asf", 123),CityInfo("asf", 123),CityInfo("asf", 123),CityInfo("asf", 123),CityInfo("asf", 123),CityInfo("asf", 123),))
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
