@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/Projects/Android/Weather/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Projects/Android/Weather/app/src/main/res/layout/fragment_city_list.xml" value="0.37083333333333335" />
+        <entry key="..\:/Projects/Android/Weather/app/src/main/res/layout/fragment_weather.xml" value="0.36666666666666664" />
+        <entry key="..\:/Projects/Android/Weather/app/src/main/res/layout/list_item_city_weather.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>

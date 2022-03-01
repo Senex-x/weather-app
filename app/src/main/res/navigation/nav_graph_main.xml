@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/weatherFragment"
-        android:name="com.senex.weather.ui.WeatherFragment"
+        android:name="com.senex.weather.ui.weather.WeatherFragment"
         android:label="WeatherFragment"
         tools:layout="@layout/fragment_weather" />
     <fragment
         android:id="@+id/cityListFragment"
-        android:name="com.senex.weather.ui.CityListFragment"
+        android:name="com.senex.weather.ui.cities.CityListFragment"
         android:label="CityListFragment"
         tools:layout="@layout/fragment_city_list" />
 </navigation>

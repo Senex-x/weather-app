@@ -1,15 +1,14 @@
-package com.senex.weather.ui
+package com.senex.weather.ui.weather
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.senex.weather.databinding.FragmentCityListBinding
 import com.senex.weather.databinding.FragmentWeatherBinding
 
-class CityListFragment: Fragment() {
-    private var _binding: FragmentCityListBinding? = null
+class WeatherFragment : Fragment() {
+    private var _binding: FragmentWeatherBinding? = null
     private val binding
         get() = _binding!!
 
@@ -17,7 +16,7 @@ class CityListFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ) = FragmentCityListBinding.inflate(
+    ) = FragmentWeatherBinding.inflate(
         inflater, container, false
     ).also { _binding = it }.root
 
