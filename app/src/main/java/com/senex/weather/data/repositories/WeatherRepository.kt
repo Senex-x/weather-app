@@ -56,7 +56,7 @@ class WeatherRepository: Api {
         return api.getWeather(city)
     }
 
-    override suspend fun getWeather(cityId: Long): Weather {
+    override suspend fun getWeather(cityId: Int): Weather {
         return api.getWeather(cityId)
     }
 }

@@ -15,7 +15,7 @@
             app:destination="@id/cityListFragment" />
         <argument
             android:name="city_id"
-            app:argType="long" />
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/cityListFragment"
