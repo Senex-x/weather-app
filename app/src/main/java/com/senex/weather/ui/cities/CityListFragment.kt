@@ -9,8 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.senex.weather.common.log
 import com.senex.weather.common.toast
-import com.senex.weather.data.entities.CityInfo
+import com.senex.weather.data.repositories.Latitude
+import com.senex.weather.data.repositories.Longitude
 import com.senex.weather.data.repositories.WeatherRepository
 import com.senex.weather.databinding.FragmentCityListBinding
 import com.senex.weather.ui.cities.recycler.CityRecyclerAdapter
@@ -36,16 +38,11 @@ class CityListFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): Unit = with(binding) {
         cityRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        cityRecyclerView.adapter = CityRecyclerAdapter(listOf(
-            CityInfo("asf", 123),
-            CityInfo("asf", 123),
-            CityInfo("asf", 123),
-            CityInfo("asf", 123),
-            CityInfo("asf", 123),
-            CityInfo("asf", 123),
-            CityInfo("asf", 123),
-            CityInfo("asf", 123),
-        ))
+        lifecycleScope.launch {
+            cityRecyclerView.adapter = CityRecyclerAdapter(
+                repository.getWeather(getMap(20))
+            )
+        }
 
         citySearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
@@ -59,6 +56,16 @@ class CityListFragment : Fragment() {
 
             override fun onQueryTextChange(newText: String?) = false
         })
+    }
+
+    private fun getMap(count: Int): Map<Latitude, Longitude> {
+        val map = mutableMapOf<Latitude, Longitude>()
+
+        for (i in 1..count) {
+            map.put(49.1221F + i, 55.7877F + i)
+        }
+
+        return map
     }
 
     private suspend fun getCityId(
