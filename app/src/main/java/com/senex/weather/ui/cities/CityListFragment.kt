@@ -16,7 +16,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.LocationServices
-import com.senex.weather.common.log
 import com.senex.weather.common.toast
 import com.senex.weather.data.repositories.Latitude
 import com.senex.weather.data.repositories.Longitude
@@ -51,11 +50,6 @@ class CityListFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): Unit = with(binding) {
         cityRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        lifecycleScope.launch {
-            cityRecyclerView.adapter = CityRecyclerAdapter(
-                repository.getWeather(getMap(20))
-            )
-        }
 
         citySearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
@@ -74,6 +68,19 @@ class CityListFragment : Fragment() {
             getLocation()
         } else {
             requestLocationAccess()
+        }
+
+        location.observe(viewLifecycleOwner) {
+            lifecycleScope.launch {
+                cityRecyclerView.adapter = CityRecyclerAdapter(
+                    repository.getWeather(getMap(
+                        20,
+                        it?.latitude?.toFloat() ?: 49F,
+                        it?.longitude?.toFloat() ?: 49F,
+                    ))
+                )
+                cityRecyclerProgressBar.visibility = View.GONE
+            }
         }
     }
 
@@ -97,18 +104,21 @@ class CityListFragment : Fragment() {
             fusedLocationClient.lastLocation
                 .addOnSuccessListener {
                     location.value = it
-                    it.latitude.toString().log()
                 }
         } catch (exception: SecurityException) {
             location.value = null
         }
     }
 
-    private fun getMap(count: Int): Map<Latitude, Longitude> {
+    private fun getMap(
+        count: Int,
+        baseLat: Latitude,
+        baseLon: Longitude,
+    ): Map<Latitude, Longitude> {
         val map = mutableMapOf<Latitude, Longitude>()
 
         for (i in 1..count) {
-            map.put(49.1221F + i, 55.7877F + i)
+            map.put(baseLat + i, baseLon + i)
         }
 
         return map
