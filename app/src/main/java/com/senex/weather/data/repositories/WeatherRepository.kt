@@ -32,9 +32,22 @@ class WeatherRepository : Api {
         )
     }
 
+    private val unitsTypeInterceptor = Interceptor { chain ->
+        chain.run {
+            val updatedRequestUrl = request().url.newBuilder()
+                .addQueryParameter("units", "metric")
+                .build()
+
+            proceed(
+                request().newBuilder().url(updatedRequestUrl).build()
+            )
+        }
+    }
+
     private val okhttp: OkHttpClient by lazy {
         OkHttpClient.Builder()
             .addInterceptor(apiKeyInterceptor)
+            .addInterceptor(unitsTypeInterceptor)
             .also {
                 if (BuildConfig.DEBUG) {
                     it.addInterceptor(
