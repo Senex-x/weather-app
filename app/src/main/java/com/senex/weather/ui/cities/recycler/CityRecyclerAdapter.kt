@@ -1,5 +1,6 @@
 package com.senex.weather.ui.cities.recycler
 
+import android.annotation.SuppressLint
 import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -19,13 +20,14 @@ class CityRecyclerAdapter(
     ) : RecyclerView.ViewHolder(
         binding.root
     ) {
+        @SuppressLint("SetTextI18n")
         fun bind(item: CityInfo) = with(binding) {
             cityName.text = item.name
 
             val color = TemperatureLevel.getLevel(item.main.temp.roundToInt()).color
             val context = root.context
             temperature.setTextColor(context.resources.getColor(color, context.theme))
-            temperature.text = item.main.temp.toString()
+            temperature.text = item.main.temp.roundToInt().toString() + " °C"
         }
     }
 

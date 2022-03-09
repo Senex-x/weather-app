@@ -6,9 +6,10 @@
     <color name="gray_lighter">#F1F1F1</color>
     <color name="gray_light">#e0e0e0</color>
     <color name="gray">#959595</color>
+    <color name="gray_dark">#3E3E3E</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="lower_temperature">#A9E6FF</color>
+    <color name="lower_temperature">#A4CDFF</color>
     <color name="low_temperature">#B0FBF2</color>
     <color name="medium_temperature">#CAFFC6</color>
     <color name="high_temperature">#FFF1C5</color>

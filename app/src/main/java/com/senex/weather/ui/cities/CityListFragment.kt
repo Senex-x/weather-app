@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.LocationServices
 import com.senex.weather.common.toast
@@ -49,8 +50,6 @@ class CityListFragment : Fragment() {
         view: View,
         savedInstanceState: Bundle?,
     ): Unit = with(binding) {
-        cityRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-
         citySearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 lifecycleScope.launch {
@@ -63,6 +62,8 @@ class CityListFragment : Fragment() {
 
             override fun onQueryTextChange(newText: String?) = false
         })
+
+        cityRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
         if (isLocationAccessGranted) {
             getLocation()
