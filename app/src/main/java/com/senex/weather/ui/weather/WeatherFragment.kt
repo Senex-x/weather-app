@@ -5,9 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.senex.weather.R
 import com.senex.weather.common.log
 import com.senex.weather.data.repositories.WeatherRepository
 import com.senex.weather.databinding.FragmentWeatherBinding
@@ -35,16 +38,24 @@ class WeatherFragment : Fragment() {
         view: View,
         savedInstanceState: Bundle?,
     ): Unit = with(binding) {
+        toolbar.navigationIcon = ResourcesCompat.getDrawable(
+            resources, R.drawable.ic_arrow_back_24, requireContext().theme
+        )
+        toolbar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+
         lifecycleScope.launch {
             val weather = repository.getWeather(args.cityId)
             loadProgressBar.visibility = View.GONE
+            informationCardView.visibility = View.VISIBLE
 
             weather.toString().log()
 
             cityName.text = weather.name
-            temperature.text = "${weather.main.temp.roundToInt()} °"
-            temperatureMin.text = "${weather.main.temp_min.roundToInt()} °"
-            temperatureMax.text = "${weather.main.temp_max.roundToInt()} °"
+            temperature.text = "${weather.main.temp.roundToInt()}°"
+            temperatureMin.text = "Min ${weather.main.temp_min.roundToInt()} °"
+            temperatureMax.text = "Max ${weather.main.temp_max.roundToInt()} °"
             weatherDescription.text = weather.weather[0].description
             windSpeed.text = "${weather.wind.speed} m/s" // Should be extracted
             humidity.text = "${weather.main.humidity} %"
