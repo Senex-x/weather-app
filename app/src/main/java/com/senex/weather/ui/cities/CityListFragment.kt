@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.LocationServices
+import com.senex.weather.common.log
 import com.senex.weather.common.toast
 import com.senex.weather.data.repositories.Latitude
 import com.senex.weather.data.repositories.Longitude
@@ -50,6 +51,9 @@ class CityListFragment : Fragment() {
         view: View,
         savedInstanceState: Bundle?,
     ): Unit = with(binding) {
+
+        navigateToWeatherFragment(524901)
+
         citySearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 lifecycleScope.launch {
@@ -80,7 +84,7 @@ class CityListFragment : Fragment() {
                         it?.longitude?.toFloat() ?: 49F,
                     ))
                 )
-                cityRecyclerProgressBar.visibility = View.GONE
+                loadProgressBar.visibility = View.GONE
             }
         }
     }
