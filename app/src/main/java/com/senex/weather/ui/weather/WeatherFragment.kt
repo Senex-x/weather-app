@@ -56,9 +56,11 @@ class WeatherFragment : Fragment() {
             temperature.text = "${weather.main.temp.roundToInt()}°"
             temperatureMin.text = "Min ${weather.main.temp_min.roundToInt()} °"
             temperatureMax.text = "Max ${weather.main.temp_max.roundToInt()} °"
-            weatherDescription.text = weather.weather[0].description
-            windSpeed.text = "${weather.wind.speed} m/s" // Should be extracted
+            weatherDescription.text = weather.weather[0].description.replaceFirstChar { it.uppercase() }
             humidity.text = "${weather.main.humidity} %"
+            windSpeed.text = "${weather.wind.speed} m/s" // Should be extracted
+            pressure.text = "${weather.main.pressure} mmHg"
+            windDirection.text = "${weather.wind.deg}"
         }
     }
 

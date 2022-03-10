@@ -7,6 +7,7 @@
     <color name="gray_light">#e0e0e0</color>
     <color name="gray">#959595</color>
     <color name="gray_dark">#3E3E3E</color>
+    <color name="gray_dark_transparent">#BF3E3E3E</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="lower_temperature">#A4CDFF</color>
