@@ -24,7 +24,7 @@ class CityRecyclerAdapter(
 
             val color = TemperatureLevel.get(item.main.temp.roundToInt()).color
             val context = root.context
-            temperature.setTextColor(context.resources.getColor(color, context.theme))
+            root.setCardBackgroundColor(context.resources.getColor(color, context.theme))
             temperature.text = item.main.temp.roundToInt().toString() + " °C"
         }
     }

@@ -24,7 +24,11 @@ import com.senex.weather.data.repositories.Longitude
 import com.senex.weather.data.repositories.WeatherRepository
 import com.senex.weather.databinding.FragmentCityListBinding
 import com.senex.weather.ui.cities.recycler.CityRecyclerAdapter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlin.random.Random
 
 class CityListFragment : Fragment() {
     private var _binding: FragmentCityListBinding? = null
@@ -52,11 +56,11 @@ class CityListFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): Unit = with(binding) {
 
-        navigateToWeatherFragment(524901)
+        //navigateToWeatherFragment(524901)
 
         citySearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                lifecycleScope.launch {
+                runBlocking { // If I do this asynchronous it fails
                     getCityId(query)?.let {
                         navigateToWeatherFragment(it)
                     } ?: requireContext().toast("City not found, try again")
@@ -123,7 +127,10 @@ class CityListFragment : Fragment() {
         val map = mutableMapOf<Latitude, Longitude>()
 
         for (i in 1..count) {
-            map.put(baseLat + i, baseLon + i)
+            map.put(
+                baseLat + Random.nextInt(-20, 20),
+                baseLon + Random.nextInt(-20, 20),
+            )
         }
 
         return map

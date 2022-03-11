@@ -3,7 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Projects/Android/Weather/app/src/main/res/drawable-v24/bg_clouds_weather.xml" value="0.2265" />
+        <entry key="..\:/Projects/Android/Weather/app/src/main/res/drawable-v24/bg_few_clouds_weather.xml" value="0.2265" />
+        <entry key="..\:/Projects/Android/Weather/app/src/main/res/drawable-v24/bg_fog_weather.xml" value="0.2265" />
+        <entry key="..\:/Projects/Android/Weather/app/src/main/res/drawable-v24/bg_rain_weather.xml" value="0.2265" />
+        <entry key="..\:/Projects/Android/Weather/app/src/main/res/drawable-v24/bg_snow_weather.xml" value="0.2265" />
+        <entry key="..\:/Projects/Android/Weather/app/src/main/res/drawable-v24/bg_storm_weather.xml" value="0.2265" />
         <entry key="..\:/Projects/Android/Weather/app/src/main/res/drawable/bg_gradient_dark_vertical.xml" value="0.228" />
+        <entry key="..\:/Projects/Android/Weather/app/src/main/res/drawable/bg_sun_weather.xml" value="0.2265" />
         <entry key="..\:/Projects/Android/Weather/app/src/main/res/drawable/bg_sunny_weather.xml" value="0.228" />
         <entry key="..\:/Projects/Android/Weather/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Projects/Android/Weather/app/src/main/res/layout/fragment_city_list.xml" value="0.37083333333333335" />

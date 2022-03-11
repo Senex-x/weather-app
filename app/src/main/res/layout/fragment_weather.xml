@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_sun_weather">
+    tools:background="@drawable/bg_few_clouds_weather">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
@@ -95,7 +95,7 @@
                 android:id="@+id/humidity_hint"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Humidity"
+                android:text="@string/humidity_hint"
                 app:layout_constraintEnd_toStartOf="@+id/wind_speed_hint"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -114,7 +114,7 @@
                 android:id="@+id/wind_speed_hint"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Wind"
+                android:text="@string/wind_speed_hint"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/humidity_hint"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -134,7 +134,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Pressure"
+                android:text="@string/pressure_hint"
                 app:layout_constraintEnd_toStartOf="@+id/wind_direction_hint"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/humidity" />
@@ -154,7 +154,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Wind direction"
+                android:text="@string/wind_direction_hint"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/pressure_hint"
                 app:layout_constraintTop_toBottomOf="@+id/wind_speed" />

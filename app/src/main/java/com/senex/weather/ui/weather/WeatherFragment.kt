@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.senex.weather.R
+import com.senex.weather.common.WeatherState
 import com.senex.weather.common.WindDirection
 import com.senex.weather.common.log
 import com.senex.weather.data.repositories.WeatherRepository
@@ -53,6 +54,12 @@ class WeatherFragment : Fragment() {
 
             weather.toString().log()
 
+            root.background = ResourcesCompat.getDrawable(
+                resources,
+                WeatherState.get(weather.weather[0].main).background,
+                requireContext().theme
+            )
+
             cityName.text = weather.name
             temperature.text = "${weather.main.temp.roundToInt()}°"
             temperatureMin.text = "Min ${weather.main.temp_min.roundToInt()} °"
@@ -61,7 +68,8 @@ class WeatherFragment : Fragment() {
             humidity.text = "${weather.main.humidity} %"
             windSpeed.text = "${weather.wind.speed} m/s" // Should be extracted
             pressure.text = "${weather.main.pressure} mmHg" // Should be extracted
-            windDirection.text = WindDirection.get(weather.wind.deg).toString().lowercase().replaceFirstChar { it.uppercase() }
+            windDirection.text = WindDirection.get(weather.wind.deg).toString().lowercase()
+                .replaceFirstChar { it.uppercase() }
         }
     }
 
