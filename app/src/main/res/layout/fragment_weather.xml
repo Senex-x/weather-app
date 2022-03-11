@@ -87,9 +87,9 @@
         tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_margin="24dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="24dp">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/humidity_hint"

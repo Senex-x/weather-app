@@ -85,7 +85,8 @@ class WeatherRepository : Api {
         coordinates.toString().log()
 
         for ((lat, lon) in coordinates) {
-            list.add(getWeather(lat, lon))
+            val city = getWeather(lat, lon)
+            if(city.name.isNotBlank()) list.add(city)
         }
 
         return list

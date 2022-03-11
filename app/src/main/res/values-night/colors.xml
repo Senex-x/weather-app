@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#2199DA</color>
+    <color name="background">#A9DEFF</color>
+    <color name="background_light">#D8F0FF</color>
+    <color name="gray_lighter">#F1F1F1</color>
+    <color name="gray_light">#e0e0e0</color>
+    <color name="gray">#959595</color>
+    <color name="gray_dark">#3E3E3E</color>
+    <color name="gray_dark_transparent">#B2000000</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="lower_temperature">#A4CDFF</color>
+    <color name="low_temperature">#83FFF0</color>
+    <color name="medium_temperature">#D9FF00</color>
+    <color name="high_temperature">#F8AA57</color>
+    <color name="higher_temperature">#FF9191</color>
+</resources>
