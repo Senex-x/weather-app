@@ -15,7 +15,7 @@ enum class TemperatureLevel(
     HIGHER(Int.MAX_VALUE, 20, R.color.higher_temperature);
 
     companion object {
-        fun getLevel(temp: Int) = values().first {
+        fun get(temp: Int) = values().first {
             temp in it.minTemp..it.maxTemp
         }
     }
