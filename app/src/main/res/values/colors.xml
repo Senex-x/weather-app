@@ -13,6 +13,6 @@
     <color name="lower_temperature">#A4CDFF</color>
     <color name="low_temperature">#83FFF0</color>
     <color name="medium_temperature">#A8FF88</color>
-    <color name="high_temperature">#FFF1C5</color>
-    <color name="higher_temperature">#FFD1D1</color>
+    <color name="high_temperature">#FFE8C5</color>
+    <color name="higher_temperature">#FFA4A4</color>
 </resources>
