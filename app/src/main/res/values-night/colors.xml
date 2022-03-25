@@ -12,7 +12,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="lower_temperature">#A4CDFF</color>
     <color name="low_temperature">#83FFF0</color>
-    <color name="medium_temperature">#A8FF88</color>
-    <color name="high_temperature">#FFE8C5</color>
-    <color name="higher_temperature">#FFA4A4</color>
+    <color name="medium_temperature">#D9FF00</color>
+    <color name="high_temperature">#F8AA57</color>
+    <color name="higher_temperature">#FF9191</color>
 </resources>
