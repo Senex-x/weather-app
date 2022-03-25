@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Weather app</string>
+    <string name="humidity_hint">Humidity</string>
+    <string name="wind_speed_hint">Wind speed</string>
+    <string name="pressure_hint">Pressure</string>
+    <string name="wind_direction_hint">Wind direction</string>
 </resources>

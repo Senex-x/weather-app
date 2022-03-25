@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface Api {
-    @GET("weather?units=metric&lang=EN")
+    @GET("weather")
     suspend fun getWeather(@Query("q") city: String): Weather
 
     @GET("weather")
