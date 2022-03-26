@@ -19,8 +19,9 @@ import com.google.android.gms.location.LocationServices
 import com.senex.weather.common.Latitude
 import com.senex.weather.common.Longitude
 import com.senex.weather.common.toast
-import com.senex.weather.data.repository.WeatherRepository
+import com.senex.weather.data.repository.RemoteWeatherRepository
 import com.senex.weather.databinding.FragmentCityListBinding
+import com.senex.weather.domain.repository.WeatherRepository
 import com.senex.weather.domain.usecases.GetCityInfoList
 import com.senex.weather.presentation.cities.recycler.CityRecyclerAdapter
 import kotlinx.coroutines.launch
@@ -32,8 +33,8 @@ class CityListFragment : Fragment() {
     private val binding
         get() = _binding!!
 
-    private val repository by lazy {
-        WeatherRepository()
+    private val repository: WeatherRepository by lazy {
+        RemoteWeatherRepository()
     }
     private val fusedLocationClient by lazy {
         LocationServices.getFusedLocationProviderClient(requireActivity())
@@ -79,7 +80,7 @@ class CityListFragment : Fragment() {
         location.observe(viewLifecycleOwner) {
             lifecycleScope.launch {
                 cityRecyclerView.adapter = CityRecyclerAdapter(
-                    GetCityInfoList()(getMap(
+                    GetCityInfoList(repository)(getMap(
                         20,
                         it?.latitude?.toFloat() ?: 49F,
                         it?.longitude?.toFloat() ?: 49F,

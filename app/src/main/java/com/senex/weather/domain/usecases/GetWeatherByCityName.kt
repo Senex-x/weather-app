@@ -5,10 +5,10 @@ import com.senex.weather.common.Longitude
 import com.senex.weather.data.repository.RemoteWeatherRepository
 import com.senex.weather.domain.repository.WeatherRepository
 
-class GetCityInfoList(
+class GetWeatherByCityName(
     private val weatherRepository: WeatherRepository
 ) {
     suspend operator fun invoke(
-        coordinates: Map<Latitude, Longitude>,
-    ) = weatherRepository.getCityInfo(coordinates)
+        cityName: String
+    ) = weatherRepository.getWeather(cityName)
 }
