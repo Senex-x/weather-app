@@ -8,7 +8,7 @@ enum class WeatherState(
     @DrawableRes val background: Int,
 ) {
     SUN(listOf("Clear"), R.drawable.bg_sun_weather),
-    FEW_CLOUDS(listOf("Clouds"), R.drawable.bg_few_clouds_weather),
+    FEW_CLOUDS(listOf("CloudsEntity"), R.drawable.bg_few_clouds_weather),
     FOG(listOf("Mist", "Smoke", "Haze", "Dust", "Fog", "Sand", "Dust", "Ash", "Squall", "Tornado"), R.drawable.bg_fog_weather),
     RAIN(listOf("Drizzle", "Rain"), R.drawable.bg_rain_weather),
     STORM(listOf("Thunderstorm"), R.drawable.bg_storm_weather),

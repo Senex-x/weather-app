@@ -1,6 +1,6 @@
 package com.senex.weather.data.entities
 
-data class WeatherX(
+data class WeatherXEntity(
     val description: String,
     val icon: String,
     val id: Int,

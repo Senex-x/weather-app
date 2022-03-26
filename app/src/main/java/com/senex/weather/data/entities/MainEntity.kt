@@ -1,6 +1,6 @@
 package com.senex.weather.data.entities
 
-data class Main(
+data class MainEntity(
     val feels_like: Double,
     val humidity: Int,
     val pressure: Int,

@@ -1,6 +1,6 @@
 package com.senex.weather.data.entities
 
-data class Sys(
+data class SysEntity(
     val country: String,
     val id: Int,
     val sunrise: Int,

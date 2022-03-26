@@ -1,5 +1,5 @@
 package com.senex.weather.data.entities
 
-data class Clouds(
+data class CloudsEntity(
     val all: Int,
 )

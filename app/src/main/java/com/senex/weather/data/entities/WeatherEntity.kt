@@ -7,7 +7,7 @@ import com.senex.weather.domain.entities.Sys
 import com.senex.weather.domain.entities.WeatherX
 import com.senex.weather.domain.entities.Wind
 
-data class Weather(
+data class WeatherEntity(
     val base: String,
     val clouds: Clouds,
     val cod: Int,
