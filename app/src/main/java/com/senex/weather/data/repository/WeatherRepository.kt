@@ -1,17 +1,16 @@
-package com.senex.weather.data.repositories;
+package com.senex.weather.data.repository;
 
 import com.senex.weather.BuildConfig
+import com.senex.weather.common.Latitude
+import com.senex.weather.common.Longitude
 import com.senex.weather.common.log
 import com.senex.weather.data.api.Api
-import com.senex.weather.data.entities.CityInfo
+import com.senex.weather.data.entities.CityInfoEntity
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
-typealias Longitude = Float
-typealias Latitude = Float
 
 private const val BASE_URL = "https://api.openweathermap.org/data/2.5/"
 private const val API_KEY = "ed3c7ed11f28b4d4bd980e0f9b10e213"
@@ -79,8 +78,8 @@ class WeatherRepository : Api {
 
     suspend fun getWeather(
         coordinates: Map<Latitude, Longitude>,
-    ): List<CityInfo> {
-        val list = mutableListOf<CityInfo>()
+    ): List<CityInfoEntity> {
+        val list = mutableListOf<CityInfoEntity>()
 
         coordinates.toString().log()
 

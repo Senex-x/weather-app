@@ -1,4 +1,4 @@
-package com.senex.weather.ui.weather
+package com.senex.weather.presentation.weather
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -14,7 +14,7 @@ import com.senex.weather.R
 import com.senex.weather.common.WeatherState
 import com.senex.weather.common.WindDirection
 import com.senex.weather.common.log
-import com.senex.weather.data.repositories.WeatherRepository
+import com.senex.weather.data.repository.WeatherRepository
 import com.senex.weather.databinding.FragmentWeatherBinding
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
