@@ -5,5 +5,5 @@ import com.senex.weather.domain.entities.Coord
 
 fun CoordEntity.transform() = Coord(
     lat,
-    lon
+    lon,
 )

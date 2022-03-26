@@ -4,8 +4,7 @@ import com.senex.weather.BuildConfig
 import com.senex.weather.common.Latitude
 import com.senex.weather.common.Longitude
 import com.senex.weather.common.log
-import com.senex.weather.data.api.Api
-import com.senex.weather.data.entities.CityInfoEntity
+import com.senex.weather.data.api.WeatherApi
 import com.senex.weather.data.mapper.transform
 import com.senex.weather.domain.entities.CityInfo
 import okhttp3.Interceptor
@@ -61,22 +60,22 @@ class WeatherRepository {
             .build()
     }
 
-    private val api: Api by lazy {
+    private val weatherApi: WeatherApi by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okhttp)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(Api::class.java)
+            .create(WeatherApi::class.java)
     }
 
-    suspend fun getWeather(city: String) = api.getWeather(city)
+    suspend fun getWeather(city: String) = weatherApi.getWeather(city).transform()
 
-    suspend fun getWeather(cityId: Int) = api.getWeather(cityId)
+    suspend fun getWeather(cityId: Int) = weatherApi.getWeather(cityId).transform()
 
     suspend fun getWeather(
         lat: Latitude, lon: Longitude,
-    ) = api.getWeather(lat, lon).transform()
+    ) = weatherApi.getWeather(lat, lon).transform()
 
     suspend fun getWeather(
         coordinates: Map<Latitude, Longitude>,

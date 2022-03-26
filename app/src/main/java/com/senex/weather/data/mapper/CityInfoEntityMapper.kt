@@ -5,5 +5,5 @@ import com.senex.weather.domain.entities.CityInfo
 
 fun CityInfoEntity.transform() = CityInfo(
     name,
-    main,
+    main.transform(),
 )

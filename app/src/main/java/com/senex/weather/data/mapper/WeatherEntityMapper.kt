@@ -5,16 +5,16 @@ import com.senex.weather.domain.entities.Weather
 
 fun WeatherEntity.transform() = Weather(
     base,
-    clouds,
+    clouds.transform(),
     cod,
-    coord,
+    coord.transform(),
     dt,
     id,
-    main,
+    main.transform(),
     name,
-    sys,
+    sys.transform(),
     timezone,
     visibility,
-    weather,
-    wind,
+    weather.map { it.transform() },
+    wind.transform(),
 )
