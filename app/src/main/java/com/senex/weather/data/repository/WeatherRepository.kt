@@ -6,6 +6,8 @@ import com.senex.weather.common.Longitude
 import com.senex.weather.common.log
 import com.senex.weather.data.api.Api
 import com.senex.weather.data.entities.CityInfoEntity
+import com.senex.weather.data.mapper.transform
+import com.senex.weather.domain.entities.CityInfo
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -16,7 +18,7 @@ private const val BASE_URL = "https://api.openweathermap.org/data/2.5/"
 private const val API_KEY = "ed3c7ed11f28b4d4bd980e0f9b10e213"
 private const val QUERY_API_KEY = "appid"
 
-class WeatherRepository : Api {
+class WeatherRepository {
     private val apiKeyInterceptor = Interceptor { chain ->
         val original = chain.request()
 
@@ -68,18 +70,18 @@ class WeatherRepository : Api {
             .create(Api::class.java)
     }
 
-    override suspend fun getWeather(city: String) = api.getWeather(city)
+    suspend fun getWeather(city: String) = api.getWeather(city)
 
-    override suspend fun getWeather(cityId: Int) = api.getWeather(cityId)
+    suspend fun getWeather(cityId: Int) = api.getWeather(cityId)
 
-    override suspend fun getWeather(
+    suspend fun getWeather(
         lat: Latitude, lon: Longitude,
-    ) = api.getWeather(lat, lon)
+    ) = api.getWeather(lat, lon).transform()
 
     suspend fun getWeather(
         coordinates: Map<Latitude, Longitude>,
-    ): List<CityInfoEntity> {
-        val list = mutableListOf<CityInfoEntity>()
+    ): List<CityInfo> {
+        val list = mutableListOf<CityInfo>()
 
         coordinates.toString().log()
 
