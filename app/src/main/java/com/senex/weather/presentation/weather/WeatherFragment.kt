@@ -52,15 +52,16 @@ class WeatherFragment : Fragment() {
 
             setBackgroundImage(it)
 
-            setCityName(it.name)
-            temperature.text = "${it.main.temp.roundToInt()}°"
-            temperatureMin.text = "Min ${it.main.temp_min.roundToInt()} °"
-            temperatureMax.text = "Max ${it.main.temp_max.roundToInt()} °"
+            weather = it
+
+            //temperature.text = "${it.main.temp.roundToInt()}°"
+            //temperatureMin.text = "Min ${it.main.temp_min.roundToInt()} °"
+            //temperatureMax.text = "Max ${it.main.temp_max.roundToInt()} °"
             weatherDescription.text = it.weather[0].description
                 .replaceFirstChar { c -> c.uppercase() }
-            humidity.text = "${it.main.humidity} %"
-            windSpeed.text = "${it.wind.speed} m/s" // Should be extracted
-            pressure.text = "${it.main.pressure} mmHg" // Should be extracted
+            //humidity.text = "${it.main.humidity} %"
+            //windSpeed.text = "${it.wind.speed} m/s" // Should be extracted
+            //pressure.text = "${it.main.pressure} mmHg" // Should be extracted
             windDirection.text = WindDirection.get(it.wind.deg).toString().lowercase()
                 .replaceFirstChar { c -> c.uppercase() }
         }

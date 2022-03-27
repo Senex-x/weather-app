@@ -2,8 +2,8 @@
 <layout>
     <data>
         <variable
-            name="city_name"
-            type="String" />
+            name="weather"
+            type="com.senex.weather.domain.model.Weather" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -28,7 +28,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            android:text="@{city_name}"
+            android:text="@{weather.name}"
             tools:text="Kazan" />
 
         <TextView
@@ -42,6 +42,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/city_name"
+            android:text="@{Long.toString(Math.round(weather.main.temp))}"
             tools:text="-18°" />
 
         <TextView
@@ -66,6 +67,7 @@
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/weather_description"
+            android:text='@{"Min " + (int)Math.round(weather.main.temp_min)+" °"}'
             tools:text="Min -24 C" />
 
         <TextView
@@ -77,6 +79,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/temperature_min"
             app:layout_constraintTop_toBottomOf="@+id/weather_description"
+            android:text='@{"Max " + (int)Math.round(weather.main.temp_max)+" °"}'
             tools:text="Max 12 C" />
 
         <androidx.cardview.widget.CardView
@@ -115,6 +118,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/wind_speed"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/humidity_hint"
+                    android:text='@{Integer.toString(weather.main.humidity) + "%"}'
                     tools:text="87%" />
 
                 <TextView
@@ -134,6 +138,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/humidity"
                     app:layout_constraintTop_toBottomOf="@id/wind_speed_hint"
+                    android:text='@{Double.toString(weather.wind.speed) + " m/s"}'
                     tools:text="64 m/s" />
 
                 <TextView
@@ -154,6 +159,7 @@
                     app:layout_constraintEnd_toStartOf="@id/wind_direction"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/pressure_hint"
+                    android:text='@{Integer.toString(weather.main.pressure) + " mmHg"}'
                     tools:text="1026 mmHg" />
 
                 <TextView

@@ -52,7 +52,7 @@ class CityListFragment : Fragment() {
 
         citySearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                lifecycleScope.launch {
+                runBlocking { // Asynchronous execution fails
                     viewModel.getCityId(query)?.let {
                         navigateToWeatherFragment(it)
                     } ?: requireContext().toast("City not found, try again")
