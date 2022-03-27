@@ -1,4 +1,4 @@
-package com.senex.weather.common
+package com.senex.weather.presentation.common
 
 import android.content.Context
 import android.util.Log

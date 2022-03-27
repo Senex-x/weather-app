@@ -17,7 +17,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.gms.location.LocationServices
-import com.senex.weather.common.toast
+import com.senex.weather.presentation.common.toast
 import com.senex.weather.databinding.FragmentCityListBinding
 import com.senex.weather.presentation.cities.recycler.CityRecyclerAdapter
 import kotlinx.coroutines.launch

@@ -2,8 +2,8 @@ package com.senex.weather.presentation.cities
 
 import android.location.Location
 import androidx.lifecycle.ViewModel
-import com.senex.weather.common.Latitude
-import com.senex.weather.common.Longitude
+import com.senex.weather.domain.util.Latitude
+import com.senex.weather.domain.util.Longitude
 import com.senex.weather.data.repository.CityRepositoryImpl
 import com.senex.weather.data.repository.WeatherRepositoryImpl
 import com.senex.weather.domain.repository.CityInfoRepository

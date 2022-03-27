@@ -1,7 +1,7 @@
 package com.senex.weather.domain.repository
 
-import com.senex.weather.common.Latitude
-import com.senex.weather.common.Longitude
+import com.senex.weather.domain.util.Latitude
+import com.senex.weather.domain.util.Longitude
 import com.senex.weather.domain.model.CityInfo
 
 interface CityInfoRepository {

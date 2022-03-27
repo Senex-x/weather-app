@@ -1,8 +1,8 @@
 package com.senex.weather.data.repository
 
-import com.senex.weather.common.Latitude
-import com.senex.weather.common.Longitude
-import com.senex.weather.common.log
+import com.senex.weather.domain.util.Latitude
+import com.senex.weather.domain.util.Longitude
+import com.senex.weather.presentation.common.log
 import com.senex.weather.data.api.WeatherApiProvider
 import com.senex.weather.data.mapper.transform
 import com.senex.weather.domain.model.CityInfo

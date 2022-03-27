@@ -8,16 +8,13 @@ import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.senex.weather.R
-import com.senex.weather.common.WeatherState
-import com.senex.weather.common.WindDirection
-import com.senex.weather.common.log
+import com.senex.weather.presentation.common.WeatherState
+import com.senex.weather.presentation.common.WindDirection
 import com.senex.weather.databinding.FragmentWeatherBinding
 import com.senex.weather.domain.model.Weather
-import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
 class WeatherFragment : Fragment() {

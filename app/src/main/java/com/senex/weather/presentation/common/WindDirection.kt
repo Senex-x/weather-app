@@ -1,4 +1,4 @@
-package com.senex.weather.common
+package com.senex.weather.presentation.common
 
 enum class WindDirection(
     val minAng: Int,
