@@ -17,11 +17,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.gms.location.LocationServices
-import com.senex.weather.presentation.common.toast
 import com.senex.weather.databinding.FragmentCityListBinding
 import com.senex.weather.presentation.cities.recycler.CityRecyclerAdapter
-import com.senex.weather.presentation.common.log
-import kotlinx.coroutines.*
+import com.senex.weather.presentation.common.toast
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class CityListFragment : Fragment() {
     private var _binding: FragmentCityListBinding? = null
@@ -51,19 +52,13 @@ class CityListFragment : Fragment() {
         //navigateToWeatherFragment(524901)
 
         citySearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
-                runBlocking { // Asynchronous execution fails
-                    viewModel.getCityId(query)?.let {
-                        navigateToWeatherFragment(it)
-                    } ?: requireContext().toast("City not found, try again")
-                }
+            override fun onQueryTextSubmit(cityName: String): Boolean {
+                openWeatherFragment(cityName)
                 return false
             }
 
             override fun onQueryTextChange(newText: String?) = false
         })
-
-        cityRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
         if (isLocationAccessGranted) {
             getLocation()
@@ -71,13 +66,26 @@ class CityListFragment : Fragment() {
             requestLocationAccess()
         }
 
+        cityRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+
         location.observe(viewLifecycleOwner) {
             lifecycleScope.launch {
                 cityRecyclerView.adapter = CityRecyclerAdapter(
                     viewModel.getCityInfoList(it)
-                )
-                loadProgressBar.visibility = View.GONE
+                ) { cityName ->
+                    openWeatherFragment(cityName)
+                }
             }
+            loadProgressBar.visibility = View.GONE
+        }
+    }
+
+    // Not Main thread execution fails
+    fun openWeatherFragment(cityName: String) {
+        CoroutineScope(Dispatchers.Main).launch {
+            viewModel.getCityId(cityName)?.let {
+                navigateToWeatherFragment(it)
+            } ?: requireContext().toast("City not found, try again")
         }
     }
 

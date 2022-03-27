@@ -42,7 +42,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/city_name"
-            android:text="@{Long.toString(Math.round(weather.main.temp))}"
+            android:text='@{Long.toString(Math.round(weather.main.temp)) + "°"}'
             tools:text="-18°" />
 
         <TextView

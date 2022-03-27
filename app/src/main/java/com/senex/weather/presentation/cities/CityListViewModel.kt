@@ -10,6 +10,7 @@ import com.senex.weather.domain.repository.CityInfoRepository
 import com.senex.weather.domain.repository.WeatherRepository
 import com.senex.weather.domain.usecase.GetCityInfoList
 import com.senex.weather.domain.usecase.GetWeatherByCityName
+import com.senex.weather.presentation.common.log
 import kotlin.random.Random
 
 const val DEFAULT_COORD = 49F
