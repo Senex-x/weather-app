@@ -11,33 +11,24 @@ import android.widget.SearchView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.gms.location.LocationServices
-import com.senex.weather.common.Latitude
-import com.senex.weather.common.Longitude
 import com.senex.weather.common.toast
-import com.senex.weather.data.repository.CityRepositoryImpl
-import com.senex.weather.data.repository.WeatherRepositoryImpl
 import com.senex.weather.databinding.FragmentCityListBinding
-import com.senex.weather.domain.repository.CityInfoRepository
-import com.senex.weather.domain.repository.WeatherRepository
-import com.senex.weather.domain.usecase.GetCityInfoList
-import com.senex.weather.domain.usecase.GetWeatherByCityName
 import com.senex.weather.presentation.cities.recycler.CityRecyclerAdapter
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import kotlin.random.Random
 
 class CityListFragment : Fragment() {
     private var _binding: FragmentCityListBinding? = null
     private val binding
         get() = _binding!!
 
-    private val weatherRepository: WeatherRepository = WeatherRepositoryImpl()
-    private val cityInfoRepository: CityInfoRepository = CityRepositoryImpl()
+    private val viewModel: CityListViewModel by viewModels()
 
     private val fusedLocationClient by lazy {
         LocationServices.getFusedLocationProviderClient(requireActivity())
@@ -62,7 +53,7 @@ class CityListFragment : Fragment() {
         citySearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 runBlocking { // If I do this asynchronous it fails
-                    getCityId(query)?.let {
+                    viewModel.getCityId(query)?.let {
                         navigateToWeatherFragment(it)
                     } ?: requireContext().toast("City not found, try again")
                 }
@@ -83,11 +74,7 @@ class CityListFragment : Fragment() {
         location.observe(viewLifecycleOwner) {
             lifecycleScope.launch {
                 cityRecyclerView.adapter = CityRecyclerAdapter(
-                    GetCityInfoList(cityInfoRepository)(getMap(
-                        20,
-                        it?.latitude?.toFloat() ?: 49F,
-                        it?.longitude?.toFloat() ?: 49F,
-                    ))
+                    viewModel.getCityInfoList(it)
                 )
                 loadProgressBar.visibility = View.GONE
             }
@@ -119,29 +106,6 @@ class CityListFragment : Fragment() {
             location.value = null
         }
     }
-
-    private fun getMap(
-        count: Int,
-        baseLat: Latitude,
-        baseLon: Longitude,
-    ): Map<Latitude, Longitude> {
-        val map = mutableMapOf<Latitude, Longitude>()
-
-        for (i in 1..count) {
-            map.put(
-                baseLat + Random.nextInt(-20, 20),
-                baseLon + Random.nextInt(-20, 20),
-            )
-        }
-
-        return map
-    }
-
-    private suspend fun getCityId(
-        cityName: String,
-    ) = runCatching {
-        GetWeatherByCityName(weatherRepository)(cityName).id
-    }.getOrNull()
 
     private fun navigateToWeatherFragment(cityId: Int) = findNavController().navigate(
         CityListFragmentDirections.actionCityListFragmentToWeatherFragment(
