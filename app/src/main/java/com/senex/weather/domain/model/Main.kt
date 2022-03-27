@@ -1,4 +1,4 @@
-package com.senex.weather.domain.entities
+package com.senex.weather.domain.model
 
 data class Main(
     val feels_like: Double,

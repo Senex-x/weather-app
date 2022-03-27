@@ -1,7 +1,7 @@
 package com.senex.weather.data.mapper
 
 import com.senex.weather.data.entities.WeatherEntity
-import com.senex.weather.domain.entities.Weather
+import com.senex.weather.domain.model.Weather
 
 fun WeatherEntity.transform() = Weather(
     base,

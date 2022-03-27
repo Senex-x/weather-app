@@ -1,4 +1,4 @@
-package com.senex.weather.domain.entities
+package com.senex.weather.domain.model
 
 data class Weather(
     val base: String,

@@ -1,4 +1,4 @@
-package com.senex.weather.domain.usecases
+package com.senex.weather.domain.usecase
 
 import com.senex.weather.domain.repository.WeatherRepository
 
@@ -7,5 +7,5 @@ class GetWeatherByCityId(
 ) {
     suspend operator fun invoke(
         cityId: Int
-    ) = weatherRepository.getWeather(cityId)
+    ) = weatherRepository.get(cityId)
 }

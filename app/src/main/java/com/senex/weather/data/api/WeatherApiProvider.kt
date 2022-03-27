@@ -1,14 +1,6 @@
-package com.senex.weather.data.repository;
+package com.senex.weather.data.api
 
 import com.senex.weather.BuildConfig
-import com.senex.weather.common.Latitude
-import com.senex.weather.common.Longitude
-import com.senex.weather.common.log
-import com.senex.weather.data.api.WeatherApi
-import com.senex.weather.data.api.WeatherApiProvider
-import com.senex.weather.data.mapper.transform
-import com.senex.weather.domain.model.CityInfo
-import com.senex.weather.domain.repository.WeatherRepository
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -19,7 +11,7 @@ private const val BASE_URL = "https://api.openweathermap.org/data/2.5/"
 private const val API_KEY = "ed3c7ed11f28b4d4bd980e0f9b10e213"
 private const val QUERY_API_KEY = "appid"
 
-class RemoteWeatherRepository : WeatherRepository {/*
+object WeatherApiProvider {
     private val apiKeyInterceptor = Interceptor { chain ->
         val original = chain.request()
 
@@ -62,7 +54,7 @@ class RemoteWeatherRepository : WeatherRepository {/*
             .build()
     }
 
-    private val weatherApi: WeatherApi by lazy {
+    val weatherApi: WeatherApi by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okhttp)
@@ -70,12 +62,4 @@ class RemoteWeatherRepository : WeatherRepository {/*
             .build()
             .create(WeatherApi::class.java)
     }
-*/
-    val weatherApi = WeatherApiProvider.weatherApi
-
-    override suspend fun get(city: String) = weatherApi.getWeather(city).transform()
-
-    override suspend fun get(cityId: Int) = weatherApi.getWeather(cityId).transform()
-
-
 }

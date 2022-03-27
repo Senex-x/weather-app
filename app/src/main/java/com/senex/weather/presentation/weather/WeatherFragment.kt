@@ -17,7 +17,7 @@ import com.senex.weather.common.log
 import com.senex.weather.data.repository.RemoteWeatherRepository
 import com.senex.weather.databinding.FragmentWeatherBinding
 import com.senex.weather.domain.repository.WeatherRepository
-import com.senex.weather.domain.usecases.GetWeatherByCityId
+import com.senex.weather.domain.usecase.GetWeatherByCityId
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 

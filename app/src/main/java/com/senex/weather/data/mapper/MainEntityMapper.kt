@@ -1,7 +1,7 @@
 package com.senex.weather.data.mapper
 
 import com.senex.weather.data.entities.MainEntity
-import com.senex.weather.domain.entities.Main
+import com.senex.weather.domain.model.Main
 
 fun MainEntity.transform() = Main(
     feels_like,

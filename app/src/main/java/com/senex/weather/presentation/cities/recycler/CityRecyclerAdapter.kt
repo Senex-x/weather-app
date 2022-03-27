@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.senex.weather.common.TemperatureLevel
-import com.senex.weather.domain.entities.CityInfo
+import com.senex.weather.domain.model.CityInfo
 import com.senex.weather.databinding.ListItemCityWeatherBinding
 import kotlin.math.roundToInt
 
