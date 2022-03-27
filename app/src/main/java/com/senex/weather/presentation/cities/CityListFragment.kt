@@ -20,8 +20,8 @@ import com.google.android.gms.location.LocationServices
 import com.senex.weather.presentation.common.toast
 import com.senex.weather.databinding.FragmentCityListBinding
 import com.senex.weather.presentation.cities.recycler.CityRecyclerAdapter
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import com.senex.weather.presentation.common.log
+import kotlinx.coroutines.*
 
 class CityListFragment : Fragment() {
     private var _binding: FragmentCityListBinding? = null
@@ -52,7 +52,7 @@ class CityListFragment : Fragment() {
 
         citySearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                runBlocking { // If I do this asynchronous it fails
+                lifecycleScope.launch {
                     viewModel.getCityId(query)?.let {
                         navigateToWeatherFragment(it)
                     } ?: requireContext().toast("City not found, try again")

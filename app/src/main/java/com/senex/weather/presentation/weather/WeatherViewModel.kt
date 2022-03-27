@@ -14,11 +14,13 @@ class WeatherViewModel: ViewModel() {
     private val repository: WeatherRepository = WeatherRepositoryImpl()
     private val getWeatherByCityId = GetWeatherByCityId(repository)
 
-    private val weather: MutableLiveData<Weather> = MutableLiveData()
+    private val _weather: MutableLiveData<Weather> = MutableLiveData()
+    val weather: LiveData<Weather>
+        get() = _weather
 
     fun getWeather(cityId: Int): LiveData<Weather> {
         viewModelScope.launch {
-            weather.postValue(getWeatherFromRepository(cityId))
+            _weather.postValue(getWeatherFromRepository(cityId))
         }
         return weather
     }

@@ -52,7 +52,7 @@ class WeatherFragment : Fragment() {
 
             setBackgroundImage(it)
 
-            cityName.text = it.name
+            setCityName(it.name)
             temperature.text = "${it.main.temp.roundToInt()}°"
             temperatureMin.text = "Min ${it.main.temp_min.roundToInt()} °"
             temperatureMax.text = "Max ${it.main.temp_max.roundToInt()} °"
