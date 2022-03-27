@@ -1,7 +1,7 @@
 package com.senex.weather.data.api
 
-import com.senex.weather.data.entities.CityInfoEntity
-import com.senex.weather.data.entities.WeatherEntity
+import com.senex.weather.data.entity.CityInfoEntity
+import com.senex.weather.data.entity.WeatherEntity
 import retrofit2.http.GET
 import retrofit2.http.Query
 

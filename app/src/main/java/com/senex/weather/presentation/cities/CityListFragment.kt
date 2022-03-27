@@ -20,7 +20,7 @@ import com.senex.weather.common.Latitude
 import com.senex.weather.common.Longitude
 import com.senex.weather.common.toast
 import com.senex.weather.data.repository.CityRepositoryImpl
-import com.senex.weather.data.repository.RemoteWeatherRepository
+import com.senex.weather.data.repository.WeatherRepositoryImpl
 import com.senex.weather.databinding.FragmentCityListBinding
 import com.senex.weather.domain.repository.CityInfoRepository
 import com.senex.weather.domain.repository.WeatherRepository
@@ -36,7 +36,7 @@ class CityListFragment : Fragment() {
     private val binding
         get() = _binding!!
 
-    private val weatherRepository: WeatherRepository = RemoteWeatherRepository()
+    private val weatherRepository: WeatherRepository = WeatherRepositoryImpl()
     private val cityInfoRepository: CityInfoRepository = CityRepositoryImpl()
 
     private val fusedLocationClient by lazy {

@@ -14,7 +14,7 @@ import com.senex.weather.R
 import com.senex.weather.common.WeatherState
 import com.senex.weather.common.WindDirection
 import com.senex.weather.common.log
-import com.senex.weather.data.repository.RemoteWeatherRepository
+import com.senex.weather.data.repository.WeatherRepositoryImpl
 import com.senex.weather.databinding.FragmentWeatherBinding
 import com.senex.weather.domain.repository.WeatherRepository
 import com.senex.weather.domain.usecase.GetWeatherByCityId
@@ -28,7 +28,7 @@ class WeatherFragment : Fragment() {
 
     private val args: WeatherFragmentArgs by navArgs()
     private val repository: WeatherRepository by lazy {
-        RemoteWeatherRepository()
+        WeatherRepositoryImpl()
     }
 
     override fun onCreateView(

@@ -1,4 +1,4 @@
-package com.senex.weather.data.entities
+package com.senex.weather.data.entity
 
 data class MainEntity(
     val feels_like: Double,
