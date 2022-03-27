@@ -1,4 +1,4 @@
-package com.senex.weather.ui.cities
+package com.senex.weather.presentation.cities
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -15,17 +15,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.LocationServices
-import com.senex.weather.common.log
+import com.senex.weather.common.Latitude
+import com.senex.weather.common.Longitude
 import com.senex.weather.common.toast
-import com.senex.weather.data.repositories.Latitude
-import com.senex.weather.data.repositories.Longitude
-import com.senex.weather.data.repositories.WeatherRepository
+import com.senex.weather.data.repository.CityRepositoryImpl
+import com.senex.weather.data.repository.WeatherRepositoryImpl
 import com.senex.weather.databinding.FragmentCityListBinding
-import com.senex.weather.ui.cities.recycler.CityRecyclerAdapter
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import com.senex.weather.domain.repository.CityInfoRepository
+import com.senex.weather.domain.repository.WeatherRepository
+import com.senex.weather.domain.usecase.GetCityInfoList
+import com.senex.weather.domain.usecase.GetWeatherByCityName
+import com.senex.weather.presentation.cities.recycler.CityRecyclerAdapter
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlin.random.Random
@@ -35,9 +36,9 @@ class CityListFragment : Fragment() {
     private val binding
         get() = _binding!!
 
-    private val repository by lazy {
-        WeatherRepository()
-    }
+    private val weatherRepository: WeatherRepository = WeatherRepositoryImpl()
+    private val cityInfoRepository: CityInfoRepository = CityRepositoryImpl()
+
     private val fusedLocationClient by lazy {
         LocationServices.getFusedLocationProviderClient(requireActivity())
     }
@@ -82,7 +83,7 @@ class CityListFragment : Fragment() {
         location.observe(viewLifecycleOwner) {
             lifecycleScope.launch {
                 cityRecyclerView.adapter = CityRecyclerAdapter(
-                    repository.getWeather(getMap(
+                    GetCityInfoList(cityInfoRepository)(getMap(
                         20,
                         it?.latitude?.toFloat() ?: 49F,
                         it?.longitude?.toFloat() ?: 49F,
@@ -139,7 +140,7 @@ class CityListFragment : Fragment() {
     private suspend fun getCityId(
         cityName: String,
     ) = runCatching {
-        repository.getWeather(cityName).id
+        GetWeatherByCityName(weatherRepository)(cityName).id
     }.getOrNull()
 
     private fun navigateToWeatherFragment(cityId: Int) = findNavController().navigate(

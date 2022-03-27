@@ -1,4 +1,4 @@
-package com.senex.weather.ui.weather
+package com.senex.weather.presentation.weather
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -14,8 +14,10 @@ import com.senex.weather.R
 import com.senex.weather.common.WeatherState
 import com.senex.weather.common.WindDirection
 import com.senex.weather.common.log
-import com.senex.weather.data.repositories.WeatherRepository
+import com.senex.weather.data.repository.WeatherRepositoryImpl
 import com.senex.weather.databinding.FragmentWeatherBinding
+import com.senex.weather.domain.repository.WeatherRepository
+import com.senex.weather.domain.usecase.GetWeatherByCityId
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
@@ -25,7 +27,9 @@ class WeatherFragment : Fragment() {
         get() = _binding!!
 
     private val args: WeatherFragmentArgs by navArgs()
-    private val repository by lazy { WeatherRepository() }
+    private val repository: WeatherRepository by lazy {
+        WeatherRepositoryImpl()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,7 +52,7 @@ class WeatherFragment : Fragment() {
         }
 
         lifecycleScope.launch {
-            val weather = repository.getWeather(args.cityId)
+            val weather = GetWeatherByCityId(repository)(args.cityId)
             loadProgressBar.visibility = View.GONE
             informationCardView.visibility = View.VISIBLE
 

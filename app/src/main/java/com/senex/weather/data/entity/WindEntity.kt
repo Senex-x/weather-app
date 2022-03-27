@@ -1,6 +1,6 @@
-package com.senex.weather.data.entities
+package com.senex.weather.data.entity
 
-data class Wind(
+data class WindEntity(
     val deg: Int,
     val gust: Double,
     val speed: Double,
