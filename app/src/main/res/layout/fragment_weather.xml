@@ -19,6 +19,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:transitionName="1"
             android:id="@+id/city_name"
             style="@style/TextAppearance.Material3.HeadlineSmall"
             android:layout_width="wrap_content"

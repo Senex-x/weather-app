@@ -13,8 +13,9 @@ import com.senex.weather.domain.usecase.GetWeatherByCityName
 import com.senex.weather.presentation.common.log
 import kotlin.random.Random
 
-const val DEFAULT_COORD = 49F
-const val SCATTER_VALUE = 20
+private const val DEFAULT_COORD = 49F
+private const val SCATTER_VALUE = 20
+private const val CITY_AMOUNT = 5
 
 class CityListViewModel : ViewModel() {
     private val weatherRepository: WeatherRepository = WeatherRepositoryImpl()
@@ -31,7 +32,7 @@ class CityListViewModel : ViewModel() {
 
     suspend fun getCityInfoList(location: Location?) = getCityInfoList(
         getMap(
-            20,
+            CITY_AMOUNT,
             location?.latitude?.toFloat() ?: DEFAULT_COORD,
             location?.longitude?.toFloat() ?: DEFAULT_COORD,
         )

@@ -2,6 +2,7 @@ package com.senex.weather.presentation.weather
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,6 +40,8 @@ class WeatherFragment : Fragment() {
         view: View,
         savedInstanceState: Bundle?,
     ): Unit = with(binding) {
+        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+
         toolbar.navigationIcon = ResourcesCompat.getDrawable(
             resources, R.drawable.ic_arrow_back_24, requireContext().theme
         )

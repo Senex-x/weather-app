@@ -4,21 +4,28 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.FragmentNavigator
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.gms.location.LocationServices
+import com.senex.weather.R
 import com.senex.weather.databinding.FragmentCityListBinding
 import com.senex.weather.presentation.cities.recycler.CityRecyclerAdapter
+import com.senex.weather.presentation.common.log
 import com.senex.weather.presentation.common.toast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -53,7 +60,7 @@ class CityListFragment : Fragment() {
 
         citySearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(cityName: String): Boolean {
-                openWeatherFragment(cityName)
+                openWeatherFragment(view, cityName)
                 return false
             }
 
@@ -72,19 +79,26 @@ class CityListFragment : Fragment() {
             lifecycleScope.launch {
                 cityRecyclerView.adapter = CityRecyclerAdapter(
                     viewModel.getCityInfoList(it)
-                ) { cityName ->
-                    openWeatherFragment(cityName)
+                ) { view, cityName ->
+                    openWeatherFragment(view, cityName)
                 }
+                loadProgressBar.visibility = View.GONE
             }
-            loadProgressBar.visibility = View.GONE
         }
     }
 
     // Not Main thread execution fails
-    fun openWeatherFragment(cityName: String) {
+    private fun openWeatherFragment(view: View, cityName: String) {
         CoroutineScope(Dispatchers.Main).launch {
             viewModel.getCityId(cityName)?.let {
-                navigateToWeatherFragment(it)
+                //val transitionName = view.findViewById<TextView>(R.id.city_name).transitionName
+                //transitionName.log()
+                ViewCompat.setTransitionName(view, "1")
+                val extras = FragmentNavigatorExtras(
+                    view to "1"
+                )
+
+                navigateToWeatherFragment(it, extras)
             } ?: requireContext().toast("City not found, try again")
         }
     }
@@ -115,11 +129,11 @@ class CityListFragment : Fragment() {
         }
     }
 
-    private fun navigateToWeatherFragment(cityId: Int) = findNavController().navigate(
-        CityListFragmentDirections.actionCityListFragmentToWeatherFragment(
-            cityId
+    private fun navigateToWeatherFragment(cityId: Int, extras: FragmentNavigator.Extras) =
+        findNavController().navigate(
+            CityListFragmentDirections.actionCityListFragmentToWeatherFragment(cityId),
+            extras,
         )
-    )
 
     override fun onDestroyView() {
         super.onDestroyView()
