@@ -4,4 +4,5 @@
     <string name="wind_speed_hint">Wind speed</string>
     <string name="pressure_hint">Pressure</string>
     <string name="wind_direction_hint">Wind direction</string>
+    <string name="transition_city_name">city_name</string>
 </resources>

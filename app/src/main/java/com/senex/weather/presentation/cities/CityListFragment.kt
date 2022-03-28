@@ -87,20 +87,24 @@ class CityListFragment : Fragment() {
         }
     }
 
-    // Not Main thread execution fails
+    // Other than Main thread execution fails
     private fun openWeatherFragment(view: View, cityName: String) {
         CoroutineScope(Dispatchers.Main).launch {
-            viewModel.getCityId(cityName)?.let {
-                //val transitionName = view.findViewById<TextView>(R.id.city_name).transitionName
-                //transitionName.log()
-                ViewCompat.setTransitionName(view, "1")
-                val extras = FragmentNavigatorExtras(
-                    view to "1"
+            viewModel.getCityId(cityName)?.let { cityId ->
+                navigateToWeatherFragment(
+                    cityId,
+                    getExtrasForSharedElementTransition(view)
                 )
-
-                navigateToWeatherFragment(it, extras)
             } ?: requireContext().toast("City not found, try again")
         }
+    }
+
+    private fun getExtrasForSharedElementTransition(view: View): FragmentNavigator.Extras {
+        val transitionName = resources.getString(R.string.transition_city_name)
+        view.transitionName = transitionName
+        return FragmentNavigatorExtras(
+            view to transitionName
+        )
     }
 
     private val isLocationAccessGranted

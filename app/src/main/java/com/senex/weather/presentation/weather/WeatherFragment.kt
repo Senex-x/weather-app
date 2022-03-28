@@ -27,6 +27,12 @@ class WeatherFragment : Fragment() {
 
     private val args: WeatherFragmentArgs by navArgs()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        sharedElementEnterTransition = TransitionInflater.from(context)
+                .inflateTransition(android.R.transition.move)
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,7 +46,7 @@ class WeatherFragment : Fragment() {
         view: View,
         savedInstanceState: Bundle?,
     ): Unit = with(binding) {
-        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+
 
         toolbar.navigationIcon = ResourcesCompat.getDrawable(
             resources, R.drawable.ic_arrow_back_24, requireContext().theme
