@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -21,18 +22,22 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.gms.location.LocationServices
 import com.senex.weather.R
 import com.senex.weather.databinding.FragmentCityListBinding
-import com.senex.weather.presentation.ui.cities.recycler.CityRecyclerAdapter
 import com.senex.weather.presentation.common.toast
+import com.senex.weather.presentation.ui.cities.recycler.CityRecyclerAdapter
+import dagger.android.support.DaggerFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CityListFragment : Fragment() {
+class CityListFragment : DaggerFragment() {
     private var _binding: FragmentCityListBinding? = null
     private val binding
         get() = _binding!!
 
-    private val viewModel: CityListViewModel by viewModels()
+    @Inject
+    lateinit var factory: ViewModelProvider.Factory
+    private val viewModel: CityListViewModel by viewModels { factory }
 
     private val fusedLocationClient by lazy {
         LocationServices.getFusedLocationProviderClient(requireActivity())

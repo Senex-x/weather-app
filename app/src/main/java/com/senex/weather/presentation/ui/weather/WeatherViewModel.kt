@@ -9,10 +9,11 @@ import com.senex.weather.domain.model.Weather
 import com.senex.weather.domain.repository.WeatherRepository
 import com.senex.weather.domain.usecase.GetWeatherByCityId
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class WeatherViewModel: ViewModel() {
-    private val repository: WeatherRepository = WeatherRepositoryImpl()
-    private val getWeatherByCityId = GetWeatherByCityId(repository)
+class WeatherViewModel @Inject constructor(
+    private val getWeatherByCityId: GetWeatherByCityId
+): ViewModel() {
 
     private val _weather: MutableLiveData<Weather> = MutableLiveData()
     val weather: LiveData<Weather>
@@ -25,5 +26,7 @@ class WeatherViewModel: ViewModel() {
         return weather
     }
 
-    private suspend fun getWeatherFromRepository(cityId: Int) = getWeatherByCityId(cityId)
+    private suspend fun getWeatherFromRepository(
+        cityId: Int
+    ) = getWeatherByCityId(cityId)
 }

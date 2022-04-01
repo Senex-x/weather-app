@@ -9,17 +9,17 @@ import dagger.Module
 import javax.inject.Singleton
 
 @Module(includes = [RepositoryCreatorModule::class])
-interface RepositoryModule {
+abstract class RepositoryModule {
 
     @Singleton
     @Binds
-    fun bindCityInfoRepository(
+    abstract fun bindCityInfoRepository(
         repository: CityInfoRepositoryImpl,
     ): CityInfoRepository
 
     @Singleton
     @Binds
-    fun bindWeatherRepository(
+    abstract fun bindWeatherRepository(
         repository: WeatherRepositoryImpl,
     ): WeatherRepository
 }
