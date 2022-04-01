@@ -1,4 +1,4 @@
-package com.senex.weather.presentation.weather
+package com.senex.weather.presentation.ui.weather
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -12,11 +12,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.senex.weather.R
-import com.senex.weather.presentation.common.WeatherState
-import com.senex.weather.presentation.common.WindDirection
 import com.senex.weather.databinding.FragmentWeatherBinding
 import com.senex.weather.domain.model.Weather
-import kotlin.math.roundToInt
+import com.senex.weather.presentation.common.WeatherState
+import com.senex.weather.presentation.common.WindDirection
 
 class WeatherFragment : Fragment() {
     private var _binding: FragmentWeatherBinding? = null

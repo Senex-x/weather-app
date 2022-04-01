@@ -1,4 +1,4 @@
-package com.senex.weather.presentation.cities
+package com.senex.weather.presentation.ui.cities
 
 import android.location.Location
 import androidx.lifecycle.ViewModel
@@ -10,7 +10,6 @@ import com.senex.weather.domain.repository.CityInfoRepository
 import com.senex.weather.domain.repository.WeatherRepository
 import com.senex.weather.domain.usecase.GetCityInfoList
 import com.senex.weather.domain.usecase.GetWeatherByCityName
-import com.senex.weather.presentation.common.log
 import kotlin.random.Random
 
 private const val DEFAULT_COORD = 49F

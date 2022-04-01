@@ -1,18 +1,15 @@
-package com.senex.weather.presentation.cities
+package com.senex.weather.presentation.ui.cities
 
 import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
-import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
@@ -24,8 +21,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.gms.location.LocationServices
 import com.senex.weather.R
 import com.senex.weather.databinding.FragmentCityListBinding
-import com.senex.weather.presentation.cities.recycler.CityRecyclerAdapter
-import com.senex.weather.presentation.common.log
+import com.senex.weather.presentation.ui.cities.recycler.CityRecyclerAdapter
 import com.senex.weather.presentation.common.toast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

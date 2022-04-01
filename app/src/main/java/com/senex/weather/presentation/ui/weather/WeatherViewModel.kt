@@ -1,4 +1,4 @@
-package com.senex.weather.presentation.weather
+package com.senex.weather.presentation.ui.weather
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
