@@ -4,7 +4,7 @@ import android.location.Location
 import androidx.lifecycle.ViewModel
 import com.senex.weather.domain.util.Latitude
 import com.senex.weather.domain.util.Longitude
-import com.senex.weather.data.repository.CityRepositoryImpl
+import com.senex.weather.data.repository.CityInfoRepositoryImpl
 import com.senex.weather.data.repository.WeatherRepositoryImpl
 import com.senex.weather.domain.repository.CityInfoRepository
 import com.senex.weather.domain.repository.WeatherRepository
@@ -18,7 +18,7 @@ private const val CITY_AMOUNT = 5
 
 class CityListViewModel : ViewModel() {
     private val weatherRepository: WeatherRepository = WeatherRepositoryImpl()
-    private val cityInfoRepository: CityInfoRepository = CityRepositoryImpl()
+    private val cityInfoRepository: CityInfoRepository = CityInfoRepositoryImpl()
 
     private val getWeatherByCityName = GetWeatherByCityName(weatherRepository)
     private val getCityInfoList = GetCityInfoList(cityInfoRepository)

@@ -8,7 +8,7 @@ import com.senex.weather.data.mapper.transform
 import com.senex.weather.domain.model.CityInfo
 import com.senex.weather.domain.repository.CityInfoRepository
 
-class CityRepositoryImpl: CityInfoRepository {
+class CityInfoRepositoryImpl: CityInfoRepository {
     override suspend fun get(
         lat: Latitude, lon: Longitude,
     ) = WeatherApiProvider.weatherApi.getWeather(lat, lon).transform()

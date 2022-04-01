@@ -6,15 +6,17 @@ import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
 import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [
     AndroidInjectionModule::class,
     ContextModule::class,
+    RepositoryModule::class,
+    UseCaseModule::class,
 ])
 interface AppComponent : AndroidInjector<WeatherApp> {
+
     override fun inject(instance: WeatherApp)
 
     @Component.Builder
