@@ -1,4 +1,4 @@
-package com.senex.weather.common
+package com.senex.weather.domain.util
 
 typealias Longitude = Float
 typealias Latitude = Float

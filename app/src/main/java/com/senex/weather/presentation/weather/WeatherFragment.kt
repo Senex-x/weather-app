@@ -2,23 +2,20 @@ package com.senex.weather.presentation.weather
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.senex.weather.R
-import com.senex.weather.common.WeatherState
-import com.senex.weather.common.WindDirection
-import com.senex.weather.common.log
-import com.senex.weather.data.repository.WeatherRepositoryImpl
+import com.senex.weather.presentation.common.WeatherState
+import com.senex.weather.presentation.common.WindDirection
 import com.senex.weather.databinding.FragmentWeatherBinding
-import com.senex.weather.domain.repository.WeatherRepository
-import com.senex.weather.domain.usecase.GetWeatherByCityId
-import kotlinx.coroutines.launch
+import com.senex.weather.domain.model.Weather
 import kotlin.math.roundToInt
 
 class WeatherFragment : Fragment() {
@@ -26,9 +23,14 @@ class WeatherFragment : Fragment() {
     private val binding
         get() = _binding!!
 
+    private val viewModel: WeatherViewModel by viewModels()
+
     private val args: WeatherFragmentArgs by navArgs()
-    private val repository: WeatherRepository by lazy {
-        WeatherRepositoryImpl()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        sharedElementEnterTransition = TransitionInflater.from(context)
+                .inflateTransition(android.R.transition.move)
+        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
@@ -44,6 +46,8 @@ class WeatherFragment : Fragment() {
         view: View,
         savedInstanceState: Bundle?,
     ): Unit = with(binding) {
+
+
         toolbar.navigationIcon = ResourcesCompat.getDrawable(
             resources, R.drawable.ic_arrow_back_24, requireContext().theme
         )
@@ -51,30 +55,33 @@ class WeatherFragment : Fragment() {
             findNavController().popBackStack()
         }
 
-        lifecycleScope.launch {
-            val weather = GetWeatherByCityId(repository)(args.cityId)
+        viewModel.getWeather(args.cityId).observe(viewLifecycleOwner) {
             loadProgressBar.visibility = View.GONE
             informationCardView.visibility = View.VISIBLE
 
-            weather.toString().log()
+            setBackgroundImage(it)
 
-            root.background = ResourcesCompat.getDrawable(
-                resources,
-                WeatherState.get(weather.weather[0].main).background,
-                requireContext().theme
-            )
+            weather = it
 
-            cityName.text = weather.name
-            temperature.text = "${weather.main.temp.roundToInt()}°"
-            temperatureMin.text = "Min ${weather.main.temp_min.roundToInt()} °"
-            temperatureMax.text = "Max ${weather.main.temp_max.roundToInt()} °"
-            weatherDescription.text = weather.weather[0].description.replaceFirstChar { it.uppercase() }
-            humidity.text = "${weather.main.humidity} %"
-            windSpeed.text = "${weather.wind.speed} m/s" // Should be extracted
-            pressure.text = "${weather.main.pressure} mmHg" // Should be extracted
-            windDirection.text = WindDirection.get(weather.wind.deg).toString().lowercase()
-                .replaceFirstChar { it.uppercase() }
+            //temperature.text = "${it.main.temp.roundToInt()}°"
+            //temperatureMin.text = "Min ${it.main.temp_min.roundToInt()} °"
+            //temperatureMax.text = "Max ${it.main.temp_max.roundToInt()} °"
+            weatherDescription.text = it.weather[0].description
+                .replaceFirstChar { c -> c.uppercase() }
+            //humidity.text = "${it.main.humidity} %"
+            //windSpeed.text = "${it.wind.speed} m/s" // Should be extracted
+            //pressure.text = "${it.main.pressure} mmHg" // Should be extracted
+            windDirection.text = WindDirection.get(it.wind.deg).toString().lowercase()
+                .replaceFirstChar { c -> c.uppercase() }
         }
+    }
+
+    private fun FragmentWeatherBinding.setBackgroundImage(weather: Weather) {
+        root.background = ResourcesCompat.getDrawable(
+            resources,
+            WeatherState.get(weather.weather[0].main).background,
+            requireContext().theme
+        )
     }
 
     override fun onDestroyView() {
