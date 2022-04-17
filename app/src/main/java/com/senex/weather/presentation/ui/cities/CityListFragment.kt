@@ -25,11 +25,13 @@ import com.senex.weather.databinding.FragmentCityListBinding
 import com.senex.weather.presentation.common.toast
 import com.senex.weather.presentation.ui.cities.recycler.CityRecyclerAdapter
 import dagger.android.support.DaggerFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class CityListFragment : DaggerFragment() {
     private var _binding: FragmentCityListBinding? = null
     private val binding
