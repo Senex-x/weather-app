@@ -16,6 +16,7 @@ import javax.inject.Singleton
     ContextModule::class,
     RepositoryModule::class,
     UseCaseModule::class,
+    RetrofitModule::class,
 ])
 interface AppComponent : AndroidInjector<WeatherApp> {
 
