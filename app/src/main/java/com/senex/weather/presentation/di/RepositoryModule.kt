@@ -8,7 +8,7 @@ import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton
 
-@Module(includes = [RepositoryCreatorModule::class])
+@Module
 abstract class RepositoryModule {
 
     @Singleton
