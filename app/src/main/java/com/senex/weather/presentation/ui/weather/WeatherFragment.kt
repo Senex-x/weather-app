@@ -1,4 +1,4 @@
-package com.senex.weather.presentation.weather
+package com.senex.weather.presentation.ui.weather
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -9,27 +9,31 @@ import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.senex.weather.R
-import com.senex.weather.presentation.common.WeatherState
-import com.senex.weather.presentation.common.WindDirection
 import com.senex.weather.databinding.FragmentWeatherBinding
 import com.senex.weather.domain.model.Weather
-import kotlin.math.roundToInt
+import com.senex.weather.presentation.common.WeatherState
+import com.senex.weather.presentation.common.WindDirection
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-class WeatherFragment : Fragment() {
+class WeatherFragment : DaggerFragment() {
     private var _binding: FragmentWeatherBinding? = null
     private val binding
         get() = _binding!!
 
-    private val viewModel: WeatherViewModel by viewModels()
+    @Inject
+    lateinit var factory: ViewModelProvider.Factory
+    private val viewModel: WeatherViewModel by viewModels { factory }
 
     private val args: WeatherFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         sharedElementEnterTransition = TransitionInflater.from(context)
-                .inflateTransition(android.R.transition.move)
+            .inflateTransition(android.R.transition.move)
         super.onCreate(savedInstanceState)
     }
 

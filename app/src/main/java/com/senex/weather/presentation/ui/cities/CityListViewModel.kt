@@ -1,28 +1,18 @@
-package com.senex.weather.presentation.cities
+package com.senex.weather.presentation.ui.cities
 
 import android.location.Location
 import androidx.lifecycle.ViewModel
-import com.senex.weather.domain.util.Latitude
-import com.senex.weather.domain.util.Longitude
-import com.senex.weather.data.repository.CityRepositoryImpl
-import com.senex.weather.data.repository.WeatherRepositoryImpl
-import com.senex.weather.domain.repository.CityInfoRepository
-import com.senex.weather.domain.repository.WeatherRepository
 import com.senex.weather.domain.usecase.GetCityInfoList
 import com.senex.weather.domain.usecase.GetWeatherByCityName
-import com.senex.weather.presentation.common.log
+import com.senex.weather.domain.util.Latitude
+import com.senex.weather.domain.util.Longitude
+import javax.inject.Inject
 import kotlin.random.Random
 
-private const val DEFAULT_COORD = 49F
-private const val SCATTER_VALUE = 20
-private const val CITY_AMOUNT = 5
-
-class CityListViewModel : ViewModel() {
-    private val weatherRepository: WeatherRepository = WeatherRepositoryImpl()
-    private val cityInfoRepository: CityInfoRepository = CityRepositoryImpl()
-
-    private val getWeatherByCityName = GetWeatherByCityName(weatherRepository)
-    private val getCityInfoList = GetCityInfoList(cityInfoRepository)
+class CityListViewModel @Inject constructor(
+    private val getWeatherByCityName: GetWeatherByCityName,
+    private val getCityInfoList: GetCityInfoList,
+) : ViewModel() {
 
     suspend fun getCityId(
         cityName: String,
@@ -54,5 +44,11 @@ class CityListViewModel : ViewModel() {
         }
 
         return map
+    }
+
+    companion object {
+        private const val DEFAULT_COORD = 49F
+        private const val SCATTER_VALUE = 20
+        private const val CITY_AMOUNT = 5
     }
 }
