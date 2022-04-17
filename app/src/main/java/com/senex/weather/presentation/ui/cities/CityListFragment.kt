@@ -24,7 +24,6 @@ import com.senex.weather.R
 import com.senex.weather.databinding.FragmentCityListBinding
 import com.senex.weather.presentation.common.toast
 import com.senex.weather.presentation.ui.cities.recycler.CityRecyclerAdapter
-import dagger.android.support.DaggerFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -32,14 +31,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class CityListFragment : DaggerFragment() {
+class CityListFragment : Fragment() {
     private var _binding: FragmentCityListBinding? = null
     private val binding
         get() = _binding!!
 
-    @Inject
-    lateinit var factory: ViewModelProvider.Factory
-    private val viewModel: CityListViewModel by viewModels { factory }
+    private val viewModel: CityListViewModel by viewModels()
 
     private val fusedLocationClient by lazy {
         LocationServices.getFusedLocationProviderClient(requireActivity())

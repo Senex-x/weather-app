@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -16,19 +17,16 @@ import com.senex.weather.databinding.FragmentWeatherBinding
 import com.senex.weather.domain.model.Weather
 import com.senex.weather.presentation.common.WeatherState
 import com.senex.weather.presentation.common.WindDirection
-import dagger.android.support.DaggerFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class WeatherFragment : DaggerFragment() {
+class WeatherFragment : Fragment() {
     private var _binding: FragmentWeatherBinding? = null
     private val binding
         get() = _binding!!
 
-    @Inject
-    lateinit var factory: ViewModelProvider.Factory
-    private val viewModel: WeatherViewModel by viewModels { factory }
+    private val viewModel: WeatherViewModel by viewModels()
 
     private val args: WeatherFragmentArgs by navArgs()
 
