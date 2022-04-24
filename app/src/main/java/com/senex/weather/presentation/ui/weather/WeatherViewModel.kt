@@ -4,13 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.senex.weather.data.repository.WeatherRepositoryImpl
 import com.senex.weather.domain.model.Weather
-import com.senex.weather.domain.repository.WeatherRepository
 import com.senex.weather.domain.usecase.GetWeatherByCityId
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class WeatherViewModel @Inject constructor(
     private val getWeatherByCityId: GetWeatherByCityId
 ): ViewModel() {

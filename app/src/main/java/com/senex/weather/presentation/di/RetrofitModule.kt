@@ -3,6 +3,9 @@ package com.senex.weather.presentation.di
 import com.senex.weather.BuildConfig
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -14,10 +17,11 @@ private const val BASE_URL = "https://api.openweathermap.org/data/2.5/"
 private const val API_KEY = "ed3c7ed11f28b4d4bd980e0f9b10e213"
 private const val QUERY_API_KEY = "appid"
 
-@Module(includes = [ApiServiceModule::class])
+@Module
+@InstallIn(SingletonComponent::class)
 class RetrofitModule {
 
-    @Singleton
+
     @Provides
     fun provideRetrofit(): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)

@@ -17,17 +17,16 @@ import com.senex.weather.databinding.FragmentWeatherBinding
 import com.senex.weather.domain.model.Weather
 import com.senex.weather.presentation.common.WeatherState
 import com.senex.weather.presentation.common.WindDirection
-import dagger.android.support.DaggerFragment
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class WeatherFragment : DaggerFragment() {
+@AndroidEntryPoint
+class WeatherFragment : Fragment() {
     private var _binding: FragmentWeatherBinding? = null
     private val binding
         get() = _binding!!
 
-    @Inject
-    lateinit var factory: ViewModelProvider.Factory
-    private val viewModel: WeatherViewModel by viewModels { factory }
+    private val viewModel: WeatherViewModel by viewModels()
 
     private val args: WeatherFragmentArgs by navArgs()
 

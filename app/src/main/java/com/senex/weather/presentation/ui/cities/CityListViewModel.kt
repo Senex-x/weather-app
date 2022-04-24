@@ -6,9 +6,11 @@ import com.senex.weather.domain.usecase.GetCityInfoList
 import com.senex.weather.domain.usecase.GetWeatherByCityName
 import com.senex.weather.domain.util.Latitude
 import com.senex.weather.domain.util.Longitude
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlin.random.Random
 
+@HiltViewModel
 class CityListViewModel @Inject constructor(
     private val getWeatherByCityName: GetWeatherByCityName,
     private val getCityInfoList: GetCityInfoList,

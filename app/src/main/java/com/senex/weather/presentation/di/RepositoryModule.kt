@@ -6,18 +6,18 @@ import com.senex.weather.domain.repository.CityInfoRepository
 import com.senex.weather.domain.repository.WeatherRepository
 import dagger.Binds
 import dagger.Module
-import javax.inject.Singleton
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
 @Module
+@InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
 
-    @Singleton
     @Binds
     abstract fun bindCityInfoRepository(
         repository: CityInfoRepositoryImpl,
     ): CityInfoRepository
 
-    @Singleton
     @Binds
     abstract fun bindWeatherRepository(
         repository: WeatherRepositoryImpl,
